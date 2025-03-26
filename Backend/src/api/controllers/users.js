@@ -113,9 +113,10 @@ const deleteUser = async (req, res, next) => {
 
     await User.findByIdAndDelete(id);
 
-    return res
-      .status(200)
-      .json({ message: 'Usuario eliminado correctamente.', userToDelete });
+    return res.status(200).json({
+      message: 'Usuario eliminado correctamente.',
+      userToDelete
+    });
   } catch (error) {
     return errorHandler(res, error);
   }

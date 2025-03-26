@@ -75,6 +75,33 @@ const getPendingEvents = async (req, res, next) => {
     return errorHandler(res, error);
   }
 };
+
+const getAttendees = async (req, res, next) => {
+  try {
+    const { eventId } = req.params;
+
+    const event = await Event.findById(eventId).populate(
+      'attendees',
+      'username email'
+    );
+    if (!event) {
+      return res.status(404).json({ message: 'Evento no encontrado.' });
+    }
+
+    if (event.attendees.length === 0) {
+      return res
+        .status(200)
+        .json({ message: 'No hay asistentes confirmados para este evento.' });
+    }
+
+    return res.status(200).json({
+      message: 'Asistentes confirmados',
+      attendees: event.attendees
+    });
+  } catch (error) {
+    return errorHandler(res, error);
+  }
+};
 const postEvent = async (req, res, next) => {
   try {
     const {
@@ -101,7 +128,9 @@ const postEvent = async (req, res, next) => {
       poster,
       userId,
       favorite,
-      reqUser: req.user
+      reqUser: req.user,
+      attendees: [],
+      verified: verified
     });
 
     return res
@@ -112,9 +141,31 @@ const postEvent = async (req, res, next) => {
   }
 };
 
+const addAttendee = async (req, res, next) => {
+  try {
+    const { eventId } = req.params;
+    const userId = req.user._id;
+
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: 'Evento no encontrado.' });
+    }
+
+    if (event.attendees.includes(userId)) {
+      return res
+        .status(400)
+        .json({ message: 'Ya estás registrado como asistente.' });
+    }
+
+    event.attendees.push(userId);
+    await Event.updateOne({ _id: eventId }, { attendees: event.attendees });
+
+    return res.status(200).json({ message: 'Asistencia confirmada.' });
+  } catch (error) {
+    return errorHandler(res, error);
+  }
+};
 const updateEvent = async (req, res, next) => {
-  console.log(req.body);
-  console.log(req.file);
   try {
     const { id } = req.params;
     const eventToUpdate = await Event.findById(id);
@@ -123,11 +174,39 @@ const updateEvent = async (req, res, next) => {
       return res.status(404).json({ message: 'Este evento no existe.' });
     }
 
-    if (req.user.rol !== 'admin') {
-      if (eventToUpdate.userId.toString() !== req.user._id.toString()) {
+    if (
+      req.user.rol !== 'admin' &&
+      eventToUpdate.userId.toString() !== req.user._id.toString()
+    ) {
+      return res
+        .status(403)
+        .json({ message: 'No tienes permisos para actualizar este evento.' });
+    }
+
+    if (req.body.attendees) {
+      try {
+        const attendeesArray = JSON.parse(req.body.attendees);
+
+        if (req.user.rol !== 'admin') {
+          const userIndex = attendeesArray.indexOf(req.user._id.toString());
+          if (
+            userIndex === -1 &&
+            attendeesArray.some(
+              (attendeeId) => attendeeId !== req.user._id.toString()
+            )
+          ) {
+            return res.status(403).json({
+              message:
+                'No tienes permisos para modificar la asistencia de otros usuarios.'
+            });
+          }
+        }
+
+        eventToUpdate.attendees = attendeesArray;
+      } catch (error) {
         return res
-          .status(403)
-          .json({ message: 'No tienes permisos para actualizar este evento.' });
+          .status(400)
+          .json({ message: 'Formato de asistente inválido.' });
       }
     }
 
@@ -142,14 +221,15 @@ const updateEvent = async (req, res, next) => {
           );
         }
       }
-
-      console.log('req.file.path:', req.file.path);
-
       eventToUpdate.poster = req.file.path;
     }
 
     for (const key in req.body) {
-      if (eventToUpdate[key] !== undefined && req.body[key] !== '') {
+      if (
+        key !== 'attendees' &&
+        eventToUpdate[key] !== undefined &&
+        req.body[key] !== ''
+      ) {
         if (key === 'favorite' || key === 'verified') {
           eventToUpdate[key] = req.body[key] === 'true';
         } else {
@@ -202,5 +282,7 @@ module.exports = {
   getPendingEvents,
   postEvent,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  addAttendee,
+  getAttendees
 };

@@ -12,8 +12,8 @@ const createEvent = async ({
   poster,
   userId,
   favorite,
-  verified,
-  reqUser
+  reqUser,
+  attendees = []
 }) => {
   try {
     if (
@@ -42,7 +42,11 @@ const createEvent = async ({
       throw new Error('Las fechas proporcionadas no son válidas.');
     }
 
-    const verified = reqUser.rol === 'admin';
+    let verified = false;
+
+    if (reqUser && reqUser.rol === 'admin') {
+      verified = true;
+    }
 
     const newEvent = new Event({
       title,
@@ -54,7 +58,8 @@ const createEvent = async ({
       poster,
       favorite: favorite,
       verified: verified,
-      userId: userId
+      userId: userId,
+      attendees: attendees
     });
 
     const eventSaved = await newEvent.save();
