@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Tomorrow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --font-family-title: 'Work Sans', sans-serif;
+  --font-family-text: 'Kanit', sans-serif;
+  --font-family-buttons: 'Tomorrow', sans-serif;
+
+  --fontsize-title: 28px;
+  --fontsize-text: 16px;
+  --fontsize-buttons: 14px;
+
+  --text-basic-light: #ffffff;
+  --text-basic-dark: #1f1f1f;
+  --text-event-title: #ff9800;
+  --text-button-primary: #ffffff;
+  --text-button-secondary: #333333;
+
+  --header-background: #1c1c1c;
+  --body-background: #272727;
+  --footer-background: #fafafa;
+
+  --button-background-primary: #ff9800;
+  --button-background-secondary: #6a1b9a;
+  --button-background-disabled: #333333;
+
+  --card-background: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+
+  --margin-xl: 40px;
+  --margin-l: 30px;
+  --margin-m: 20px;
+  --margin-s: 15px;
+  --margin-xs: 10px;
+
+  --padding-xl: 40px;
+  --padding-l: 30px;
+  --padding-m: 20px;
+  --padding-s: 15px;
+  --padding-xs: 10px;
+
+  --gap-xl: 40px;
+  --gap-l: 30px;
+  --gap-m: 20px;
+  --gap-s: 15px;
+  --gap-xs: 10px;
+
+  --border-radius-cards: 8px;
+  --border-radius-buttons: 6px;
+  --transition-speed: 0.3s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  font-family: 'Tomorrow', sans-serif;
+}
+
+body {
+  background-color: var(--body-background);
+  min-height: 100svh;
+}

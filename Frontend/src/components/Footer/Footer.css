@@ -1,0 +1,97 @@
+#footer {
+  background-color: var(--footer-background);
+  padding: var(--padding-m);
+  text-align: center;
+  margin-top: var(--margin-xl);
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.about-us-section,
+.contact-legal-section {
+  flex: 1;
+  min-width: 200px;
+  margin: var(--margin-xs);
+  text-align: left;
+}
+
+.contact-legal-section {
+  display: flex;
+  justify-content: space-around;
+}
+
+.contact-section,
+.legal-section {
+  flex: 1;
+  min-width: 200px;
+  margin: var(--margin-xs);
+}
+
+.footer-section h3 {
+  font-size: 1.2em;
+  margin-bottom: var(--margin-xs);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section li {
+  margin: 5px 0;
+}
+
+.contact-section a,
+.legal-section button {
+  background: none;
+  border: none;
+  color: var(--text-basic-dark);
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-family-buttons);
+  text-decoration: none;
+  font-size: var(--fontsize-text);
+}
+
+.contact-section a:hover,
+.legal-section button:hover {
+  color: var(--text-event-title);
+}
+
+.footer-copyright {
+  font-size: var(--fontsize-text);
+  color: #666;
+  padding-top: var(--padding-xs);
+  border-top: 1px solid #ddd;
+}
+
+.contact-section span {
+  color: var(--text-basic-dark);
+  font-family: var(--font-family-buttons);
+  font-size: var(--fontsize-text);
+}
+
+.about-us-section p {
+  font-size: var(--fontsize-text);
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-legal-section {
+    flex-direction: column;
+  }
+
+  .about-us-section,
+  .contact-section,
+  .legal-section {
+    text-align: center;
+  }
+}

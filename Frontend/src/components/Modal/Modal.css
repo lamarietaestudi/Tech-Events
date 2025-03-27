@@ -1,0 +1,50 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+  overflow: auto;
+  padding: 20px 0;
+}
+
+.modal-content {
+  background-color: var(--text-basic-light);
+  padding: var(--padding-m);
+  border-radius: var(--border-radius-cards);
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: visible;
+  margin: 20px 0;
+}
+
+.modal-content h2 {
+  margin-bottom: var(--margin-s);
+}
+
+.modal-content p {
+  line-height: 1.6;
+  margin-bottom: var(--margin-m);
+  font-family: var(--font-family-text);
+  font-weight: 300;
+}
+
+.modal-content button {
+  background-color: var(--button-background-primary);
+  color: var(--text-button-primary);
+  border: none;
+  padding: var(--padding-xs) var(--padding-s);
+  border-radius: var(--border-radius-buttons);
+  cursor: pointer;
+  font-family: var(--font-family-buttons);
+}
+
+.modal-content button:hover {
+  background-color: var(--button-background-secondary);
+}
