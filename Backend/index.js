@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const { connectDB } = require('./src/config/db');
 const { connectCloudinary } = require('./src/config/cloudinary');
 const eventsRoute = require('./src/api/routes/events');
@@ -7,6 +8,7 @@ const usersRoute = require('./src/api/routes/users');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 connectDB();

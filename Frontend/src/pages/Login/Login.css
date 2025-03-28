@@ -1,0 +1,41 @@
+#login {
+  min-height: 92svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login h2 {
+  font-size: var(--fontsize-title-form);
+  font-family: var(--font-family-title);
+  color: var(--text-basic-light);
+  margin-bottom: var(--margin-m);
+  text-align: center;
+}
+
+#login p {
+  font-size: var(--fontsize-text);
+  font-family: var(--font-family-text);
+  color: var(--text-basic-light);
+  margin: var(--margin-s);
+  text-align: center;
+}
+
+#login form {
+  width: 300px;
+  padding: var(--padding-m);
+  border-radius: var(--border-radius-cards);
+  margin-bottom: var(--margin-xs);
+}
+
+#login .form-toggle-button {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: var(--padding-s) var(--padding-m);
+  border-radius: var(--border-radius-buttons);
+  border: none;
+  cursor: pointer;
+  font-size: var(--fontsize-buttons);
+  font-family: var(--font-family-buttons);
+  margin-top: var(--margin-m);
+}

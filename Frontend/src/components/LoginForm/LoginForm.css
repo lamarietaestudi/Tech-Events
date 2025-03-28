@@ -1,0 +1,28 @@
+.login-form {
+  background-color: var(--form-background-login);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--gap-s);
+}
+
+.login-form label {
+  font-size: var(--fontsize-text);
+  font-family: var(--font-family-text);
+  color: var(--text-form-login);
+  margin-bottom: var(--margin-xs);
+}
+
+.login-form input {
+  padding: var(--padding-xs);
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius-buttons);
+  font-size: var(--fontsize-text);
+  font-family: var(--font-family-text);
+}
+
+.login-form button {
+  padding: var(--padding-xs) var(--padding-m);
+  margin-top: var(--margin-s);
+}

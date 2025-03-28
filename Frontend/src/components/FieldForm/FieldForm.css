@@ -1,0 +1,15 @@
+.field-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.field-form > input {
+  border-radius: var(--border-radius-buttons);
+  border: none;
+  text-align: center;
+  padding: 8px 10px;
+  height: 35px;
+}

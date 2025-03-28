@@ -1,11 +1,7 @@
+import { createPage } from '../../utils/functions/createPage';
 import './CreateEvent.css';
 
 export const CreateEvent = () => {
-  const content = document.querySelector('#content');
-  const div = document.createElement('div');
-  div.id = 'create-event';
-
-  content.innerHTML = '';
-
-  content.append(div);
+  const div = createPage('create-event');
+  div.innerHTML = `<h1>Crear eventos</h1>`;
 };
